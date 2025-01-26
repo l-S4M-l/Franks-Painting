@@ -177,42 +177,6 @@ class Ui_CFSS(object):
 "background-color: rgb(58, 19, 47);\n"
 "}")
         self.ConvertImages.setObjectName("ConvertImages")
-        self.out_put_res_display = QtWidgets.QLabel(self.paint_editor_tab)
-        self.out_put_res_display.setGeometry(QtCore.QRect(840, 140, 161, 81))
-        self.out_put_res_display.setStyleSheet("font: 20pt \"Hawkeye\";\n"
-"color:rgb(200, 114, 177);")
-        self.out_put_res_display.setObjectName("out_put_res_display")
-        self.Alias_title = QtWidgets.QLabel(self.paint_editor_tab)
-        self.Alias_title.setGeometry(QtCore.QRect(840, 150, 111, 20))
-        self.Alias_title.setStyleSheet("font: 10pt \"Hawkeye\";\n"
-"color:rgb(117, 40, 98);")
-        self.Alias_title.setObjectName("Alias_title")
-        self.up_res = QtWidgets.QPushButton(self.paint_editor_tab)
-        self.up_res.setGeometry(QtCore.QRect(1010, 141, 61, 31))
-        self.up_res.setStyleSheet(".QPushButton{\n"
-"background-color: rgb(63, 21, 52);\n"
-"border-radius:4px;\n"
-"font: 14pt \"Hawkeye\";\n"
-"color:rgb(200, 114, 177);\n"
-"}\n"
-"\n"
-".QPushButton::pressed{\n"
-"background-color: rgb(58, 19, 47);\n"
-"}")
-        self.up_res.setObjectName("up_res")
-        self.down_res = QtWidgets.QPushButton(self.paint_editor_tab)
-        self.down_res.setGeometry(QtCore.QRect(1010, 176, 61, 31))
-        self.down_res.setStyleSheet(".QPushButton{\n"
-"background-color: rgb(63, 21, 52);\n"
-"border-radius:4px;\n"
-"font: 14pt \"Hawkeye\";\n"
-"color:rgb(200, 114, 177);\n"
-"}\n"
-"\n"
-".QPushButton::pressed{\n"
-"background-color: rgb(58, 19, 47);\n"
-"}")
-        self.down_res.setObjectName("down_res")
         self.bg = QtWidgets.QLabel(CFSS)
         self.bg.setGeometry(QtCore.QRect(49, 30, 1101, 651))
         self.bg.setStyleSheet("background-color:#1d0a18;\n"
@@ -232,10 +196,10 @@ class Ui_CFSS(object):
 
     def retranslateUi(self, CFSS):
         _translate = QtCore.QCoreApplication.translate
-        CFSS.setWindowTitle(_translate("CFSS", "CFSS"))
+        CFSS.setWindowTitle(_translate("CFSS", "FP"))
         self.close.setText(_translate("CFSS", "x"))
         self.mini_but.setText(_translate("CFSS", "-"))
-        self.window_title.setText(_translate("CFSS", "Coach frank Skate Shop"))
+        self.window_title.setText(_translate("CFSS", "Franks Painting"))
         self.aksdjfkjladsfklsdf.setText(_translate("CFSS", "PushButton"))
         self.aksdjfkjladsfklsdf.setShortcut(_translate("CFSS", "Left"))
         self.sdfksdlkflksdfl.setText(_translate("CFSS", "PushButton"))
@@ -244,10 +208,6 @@ class Ui_CFSS(object):
         self.coverter.setText(_translate("CFSS", "converter"))
         self.images_bg_textures.setText(_translate("CFSS", "drag here"))
         self.ConvertImages.setText(_translate("CFSS", "Convert Images"))
-        self.out_put_res_display.setText(_translate("CFSS", "512 x 512"))
-        self.Alias_title.setText(_translate("CFSS", "Output res"))
-        self.up_res.setText(_translate("CFSS", "Up"))
-        self.down_res.setText(_translate("CFSS", "Down"))
 
 
 if __name__ == "__main__":

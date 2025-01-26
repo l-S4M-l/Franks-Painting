@@ -45,7 +45,7 @@ class Ui_Form(object):
 "color:white;")
         self.image_title.setObjectName("image_title")
         self.opacity_slider = QtWidgets.QSlider(self.item_frame)
-        self.opacity_slider.setGeometry(QtCore.QRect(550, 50, 160, 22))
+        self.opacity_slider.setGeometry(QtCore.QRect(569, 52, 141, 22))
         self.opacity_slider.setStyleSheet("QSlider::groove:horizontal {\n"
 "    border-radius: 9px;\n"
 "    height: 15px;\n"
@@ -64,14 +64,14 @@ class Ui_Form(object):
         self.opacity_slider.setOrientation(QtCore.Qt.Horizontal)
         self.opacity_slider.setObjectName("opacity_slider")
         self.opacity_title = QtWidgets.QLabel(self.item_frame)
-        self.opacity_title.setGeometry(QtCore.QRect(552, 31, 111, 21))
+        self.opacity_title.setGeometry(QtCore.QRect(570, 33, 111, 21))
         self.opacity_title.setStyleSheet("font: 10pt \"Hawkeye\";\n"
 "color:rgb(117, 40, 98);")
         self.opacity_title.setObjectName("opacity_title")
         self.opacity_val = QtWidgets.QLabel(self.item_frame)
-        self.opacity_val.setGeometry(QtCore.QRect(550, 80, 160, 31))
+        self.opacity_val.setGeometry(QtCore.QRect(569, 76, 141, 21))
         self.opacity_val.setStyleSheet("font: 15pt \"Hawkeye\";\n"
-"color:white;")
+"color:rgb(200, 114, 177);")
         self.opacity_val.setAlignment(QtCore.Qt.AlignCenter)
         self.opacity_val.setObjectName("opacity_val")
         self.close_page = QtWidgets.QPushButton(self.item_frame)
@@ -94,6 +94,46 @@ class Ui_Form(object):
         self.Alias_title.setStyleSheet("font: 10pt \"Hawkeye\";\n"
 "color:rgb(117, 40, 98);")
         self.Alias_title.setObjectName("Alias_title")
+        self.out_res_label = QtWidgets.QLabel(self.item_frame)
+        self.out_res_label.setGeometry(QtCore.QRect(400, 30, 111, 20))
+        self.out_res_label.setStyleSheet("font: 10pt \"Hawkeye\";\n"
+"color:rgb(117, 40, 98);")
+        self.out_res_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.out_res_label.setObjectName("out_res_label")
+        self.out_put_res_display = QtWidgets.QLabel(self.item_frame)
+        self.out_put_res_display.setGeometry(QtCore.QRect(417, 47, 81, 31))
+        self.out_put_res_display.setStyleSheet("font: 20pt \"Hawkeye\";\n"
+"color:rgb(200, 114, 177);")
+        self.out_put_res_display.setAlignment(QtCore.Qt.AlignCenter)
+        self.out_put_res_display.setObjectName("out_put_res_display")
+        self.up_res = QtWidgets.QPushButton(self.item_frame)
+        self.up_res.setGeometry(QtCore.QRect(420, 80, 31, 23))
+        self.up_res.setStyleSheet(".QPushButton{\n"
+"background-color: rgb(72, 28, 71);\n"
+"border-radius:4px;\n"
+"font: 14pt \"Hawkeye\";\n"
+"color:rgb(200, 114, 177);\n"
+"}\n"
+"\n"
+".QPushButton::pressed{\n"
+"background-color: rgb(58, 19, 47);\n"
+"}")
+        self.up_res.setText("")
+        self.up_res.setObjectName("up_res")
+        self.down_res = QtWidgets.QPushButton(self.item_frame)
+        self.down_res.setGeometry(QtCore.QRect(463, 80, 31, 23))
+        self.down_res.setStyleSheet(".QPushButton{\n"
+"background-color: rgb(72, 28, 71);\n"
+"border-radius:4px;\n"
+"font: 14pt \"Hawkeye\";\n"
+"color:rgb(200, 114, 177);\n"
+"}\n"
+"\n"
+".QPushButton::pressed{\n"
+"background-color: rgb(58, 19, 47);\n"
+"}")
+        self.down_res.setText("")
+        self.down_res.setObjectName("down_res")
         self.main_item_bg_shadow.raise_()
         self.main_item_bg.raise_()
         self.image_text.raise_()
@@ -104,6 +144,10 @@ class Ui_Form(object):
         self.close_page.raise_()
         self.alias_input.raise_()
         self.Alias_title.raise_()
+        self.out_res_label.raise_()
+        self.out_put_res_display.raise_()
+        self.up_res.raise_()
+        self.down_res.raise_()
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -117,6 +161,8 @@ class Ui_Form(object):
         self.close_page.setText(_translate("Form", "x"))
         self.alias_input.setText(_translate("Form", "0x0000000000000000"))
         self.Alias_title.setText(_translate("Form", "Alias"))
+        self.out_res_label.setText(_translate("Form", "Output res"))
+        self.out_put_res_display.setText(_translate("Form", "512"))
 
 
 if __name__ == "__main__":

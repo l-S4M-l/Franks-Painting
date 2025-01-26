@@ -56,7 +56,6 @@ class ui_class(main_ui_form, QtWidgets.QWidget):
         super().setupUi(Form)
         self.cwd = os.getcwd().replace("\\","/")
         self.current_card_index = 0
-        self.out_res = 512
 
         stylesheet = """background-color:rgba(0,0,0,0);"""
         self.paint_bucket.setStyleSheet(stylesheet)
@@ -85,8 +84,6 @@ class ui_class(main_ui_form, QtWidgets.QWidget):
         self.paint_bucket.clicked.connect(lambda : self.popup("uwu"))
         self.images_bg_textures.file_dropped.connect(self.file_dragged_in)
         self.ConvertImages.clicked.connect(self.convert_images)
-        self.up_res.clicked.connect(self.up_res_clicked)
-        self.down_res.clicked.connect(self.down_res_clicked)
 
     def file_dragged_in(self,paths:list):
         for value, i in enumerate(paths):
@@ -186,7 +183,7 @@ class ui_class(main_ui_form, QtWidgets.QWidget):
 
         setattr(self, f"opacity_slider{ self.current_card_index}", QtWidgets.QSlider(item_frame))
         opacity_slider:QtWidgets.QSlider = getattr(self, f"opacity_slider{ self.current_card_index}")
-        opacity_slider.setGeometry(QtCore.QRect(550, 50, 160, 22))
+        opacity_slider.setGeometry(QtCore.QRect(569, 52, 141, 22))
         opacity_slider.setStyleSheet("""
                         QSlider::groove:horizontal {
                                 border-radius: 9px;
@@ -208,11 +205,48 @@ class ui_class(main_ui_form, QtWidgets.QWidget):
         
         opacity_slider.valueChanged.connect(lambda:opacity_val.setText(f"{opacity_slider.value()}%"))
 
+        setattr(self, f"out_res_label_{self.current_card_index}", QtWidgets.QLabel(item_frame))
+        out_res_label:QtWidgets.QLabel = getattr(self, f"out_res_label_{self.current_card_index}")
+        out_res_label = QtWidgets.QLabel(item_frame)
+        out_res_label.setGeometry(QtCore.QRect(400, 30, 111, 20))
+        out_res_label.setStyleSheet("font: 10pt \"Hawkeye\"; color:rgb(117, 40, 98);")
+        out_res_label.setAlignment(QtCore.Qt.AlignCenter)
+        out_res_label.setObjectName(f"{self.current_card_index}_out_res_label")
+        out_res_label.setText("Output res")
+        
+
+        setattr(self, f"out_put_res_display_{self.current_card_index}", QtWidgets.QLabel(item_frame))
+        out_put_res_display:QtWidgets.QLabel = getattr(self, f"out_put_res_display_{self.current_card_index}")
+        out_put_res_display.setGeometry(QtCore.QRect(417, 47, 81, 31))
+        out_put_res_display.setStyleSheet("font: 20pt \"Hawkeye\"; color:rgb(200, 114, 177);")
+        out_put_res_display.setAlignment(QtCore.Qt.AlignCenter)
+        out_put_res_display.setObjectName(f"{self.current_card_index}_out_put_res_display")
+        out_put_res_display.setText("512")
+
+
+        setattr(self,f"up_res_{self.current_card_index}", QtWidgets.QPushButton(item_frame))
+        up_res:QtWidgets.QPushButton = getattr(self,f"up_res_{self.current_card_index}")
+        up_res.setGeometry(QtCore.QRect(420, 80, 31, 23))
+        up_res.setStyleSheet(".QPushButton{background-color: rgb(72, 28, 71);border-radius:4px;font: 14pt \"Hawkeye\";color:rgb(200, 114, 177);}.QPushButton::pressed{background-color: rgb(58, 19, 47);}")
+        up_res.setText("")
+        up_res.setObjectName(f"{self.current_card_index}_up_res")
+        up_res.setIcon(QtGui.QIcon(f"{self.cwd}/assets/arrow up.png"))
+        up_res.clicked.connect(self.up_res_clicked)
+
+        setattr(self,f"down_res_{self.current_card_index}", QtWidgets.QPushButton(item_frame))
+        down_res:QtWidgets.QPushButton = getattr(self,f"down_res_{self.current_card_index}")
+        down_res.setGeometry(QtCore.QRect(463, 80, 31, 23))
+        down_res.setStyleSheet(".QPushButton{background-color: rgb(72, 28, 71);border-radius:4px;font: 14pt \"Hawkeye\";color:rgb(200, 114, 177);}.QPushButton::pressed{background-color: rgb(58, 19, 47);}")
+        down_res.setText("")
+        down_res.setObjectName(f"{self.current_card_index}_down_res")
+        down_res.setIcon(QtGui.QIcon(f"{self.cwd}/assets/arrow down.png"))
+        down_res.clicked.connect(self.down_res_clicked)
+
 
         setattr(self, f"opacity_title_val", QtWidgets.QLabel(item_frame))
         opacity_title = getattr(self, f"opacity_title_val")
 
-        opacity_title.setGeometry(QtCore.QRect(552, 31, 111, 21))
+        opacity_title.setGeometry(QtCore.QRect(570, 33, 111, 21))
         opacity_title.setStyleSheet("font: 10pt \"Hawkeye\"; color:rgb(117, 40, 98);")
         opacity_title.setObjectName(f"{self.current_card_index}_opacity_title_val")
         opacity_title.setText("opacity")
@@ -220,8 +254,8 @@ class ui_class(main_ui_form, QtWidgets.QWidget):
 
         setattr(self, f"opacity_val_{ self.current_card_index}", QtWidgets.QLabel(item_frame))
         opacity_val:QtWidgets.QLabel = getattr(self, f"opacity_val_{ self.current_card_index}")
-        opacity_val.setGeometry(QtCore.QRect(550, 80, 160, 31))
-        opacity_val.setStyleSheet("font: 15pt \"Hawkeye\"; color:white;")
+        opacity_val.setGeometry(QtCore.QRect(569, 76, 141, 21))
+        opacity_val.setStyleSheet("font: 15pt \"Hawkeye\"; color:rgb(200, 114, 177);")
         opacity_val.setAlignment(QtCore.Qt.AlignCenter)
         opacity_val.setObjectName(f"{self.current_card_index}_opacity_val")
         opacity_val.setText("10%")
@@ -244,7 +278,11 @@ class ui_class(main_ui_form, QtWidgets.QWidget):
         close_page.raise_()
         alias_input.raise_()
         Alias_title.raise_()
-
+        out_res_label.raise_()
+        out_put_res_display.raise_()
+        up_res.raise_()
+        down_res.raise_()
+        
         item_frame.show()
         self.current_card_index = self.current_card_index + 1
     
@@ -309,6 +347,7 @@ class ui_class(main_ui_form, QtWidgets.QWidget):
         
         image_list = []
         image_title = []
+        res_list = []
         for i in label_list:
             if "image_text" in i.objectName():
                 image_list.append(i)
@@ -320,6 +359,9 @@ class ui_class(main_ui_form, QtWidgets.QWidget):
 
             if "image_title" in i.objectName():
                 image_title.append(i.text())
+            
+            if "out_put_res_display" in i.objectName():
+                res_list.append(i)
 
         for index_val , i in enumerate(image_list):
             i:QtWidgets.QLabel = i
@@ -335,7 +377,8 @@ class ui_class(main_ui_form, QtWidgets.QWidget):
             raw_bytes = io.BytesIO(byte_array.data())
             pil_img = PImage.open(raw_bytes).convert("RGBA")
 
-            pil_img = pil_img.resize((self.out_res, self.out_res))
+            res = int(res_list[index_val].text())
+            pil_img = pil_img.resize((res, res))
             pil_img = scale_opacity(pil_img,opacity/100)
 
             img_byte_arr = io.BytesIO()
@@ -371,16 +414,32 @@ class ui_class(main_ui_form, QtWidgets.QWidget):
         self.popup("All Images Converted \n they can be found in the folder called exported psgs")
 
     def up_res_clicked(self):
-        if self.out_res != 4096:
-            self.out_res = self.out_res * 2
+        out_put_res_displays:list[QtWidgets.QLabel] = self.sender().parent().findChildren(QtWidgets.QLabel)
+        for i in out_put_res_displays:
+            if "out_put_res_display" in i.objectName():
+                out_put_res_display = i
+                break
         
-        self.out_put_res_display.setText(f"{self.out_res} x {self.out_res}")
+        out_res = int(out_put_res_display.text())
+
+        if out_res != 4096:
+            out_res = out_res * 2
+        
+        out_put_res_display.setText(f"{out_res}")
     
     def down_res_clicked(self):
-        if self.out_res != 128:
-            self.out_res = int(self.out_res / 2)
+        out_put_res_displays:list[QtWidgets.QLabel] = self.sender().parent().findChildren(QtWidgets.QLabel)
+        for i in out_put_res_displays:
+            if "out_put_res_display" in i.objectName():
+                out_put_res_display = i
+                break
         
-        self.out_put_res_display.setText(f"{self.out_res} x {self.out_res}")
+        out_res = int(out_put_res_display.text())
+
+        if out_res != 128:
+            out_res = int(out_res / 2)
+        
+        out_put_res_display.setText(f"{out_res}")
     
     def popup(self, message,error_with_log=False):
         self.popup_ui = popup_ui()

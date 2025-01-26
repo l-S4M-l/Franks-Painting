@@ -102,7 +102,7 @@ class Ui_Form(object):
         self.message.setText(_translate("Form", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"))
         self.close_but.setText(_translate("Form", "x"))
         self.mini_but.setText(_translate("Form", ""))
-        self.window_title.setText(_translate("Form", "Coach frank Skate Shop"))
+        self.window_title.setText(_translate("Form", "Franks Painting"))
         self.okbutton.setText(_translate("Form", "Ok"))
         self.open_log.setText(_translate("Form", "Open log"))
 
