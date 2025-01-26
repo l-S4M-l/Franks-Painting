@@ -12,12 +12,6 @@ import subprocess
 import math
 import io
 import subprocess
-import shutil
-
-os.environ['MAGICK_HOME'] = f"{os.getcwd().replace("\\","/")}/assets/imageMagik"  # Path to your portable ImageMagick
-os.environ['PATH'] = os.environ['MAGICK_HOME'] + r'\bin;' + os.environ['PATH']
-
-from wand.image import Image as Wimage
 
 
 logger = logging.basicConfig(
