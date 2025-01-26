@@ -276,7 +276,7 @@ class ui_class(main_ui_form, QtWidgets.QWidget):
         print(self.current_card_index)
 
     def image_to_dds(self,texture_path):
-        subprocess.run(f'assets/texconv.exe -y -f DXT5 -o "{texture_path}" "M:/Skate 3 Modding and saves/xbox modding/coding/FP/code/temp.png"')
+        subprocess.run(f'assets/texconv.exe -y -f DXT5 -o "{texture_path}" "{self.cwd}/temp.png"')
 
     def dds_to_psg(self,dds_path,alias):
         os.chdir(f"{self.cwd}/assets/PsgCliTool")
