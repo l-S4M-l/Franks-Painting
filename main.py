@@ -25,6 +25,7 @@ logger = logging.getLogger(__name__)
 
 class DragDropLabel(QtWidgets.QLabel):
     file_dropped = QtCore.pyqtSignal(list)
+    clicked = QtCore.pyqtSignal()
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -44,6 +45,35 @@ class DragDropLabel(QtWidgets.QLabel):
         else:
             self.setText("Invalid file")
             event.ignore()
+
+    def mousePressEvent(self, _):
+        self.clicked.emit()
+
+class DragDropLineEdit(QtWidgets.QLineEdit):
+    file_dropped = QtCore.pyqtSignal(list)
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setText("Drag a file here")
+        self.setAcceptDrops(True)
+
+    def dragEnterEvent(self, event: QtGui.QDragEnterEvent):
+        if event.mimeData().hasUrls():
+            event.acceptProposedAction()
+        else:
+            event.ignore()
+
+    def dropEvent(self, event: QtGui.QDropEvent):
+        if event.mimeData().hasUrls():
+            file_paths = [url.toLocalFile() for url in event.mimeData().urls()]
+            self.file_dropped.emit(file_paths)
+        else:
+            self.setText("Invalid file")
+            event.ignore()
+        
+    
+
+
 
 class ui_class(main_ui_form, QtWidgets.QWidget):
     def setupUi(self, Form):
@@ -71,12 +101,12 @@ class ui_class(main_ui_form, QtWidgets.QWidget):
         self.images_bg_textures.setStyleSheet("background-color: rgb(39, 13, 32); border-radius:10px; border:2px solid rgb(229, 130, 202); font: 15pt \"Hawkeye\"; color:white;")
         self.images_bg_textures.setAlignment(QtCore.Qt.AlignCenter)
         self.images_bg_textures.setObjectName("images_bg_textures")
-
         self.events()
 
     def events(self):
         self.paint_bucket.clicked.connect(lambda : self.popup("uwu"))
         self.images_bg_textures.file_dropped.connect(self.file_dragged_in)
+        self.images_bg_textures.clicked.connect(self.file_clicked)
         self.ConvertImages.clicked.connect(self.convert_images)
 
     def file_dragged_in(self,paths:list):
@@ -104,6 +134,29 @@ class ui_class(main_ui_form, QtWidgets.QWidget):
         
         self.repaint()
 
+    def file_clicked(self):
+        dialog = QtWidgets.QFileDialog()
+        
+        selected_files, _ = dialog.getOpenFileNames()
+        if selected_files:
+            file_list = selected_files
+            accepted_formats = [
+                "bmp",       # Bitmap
+                "ico",       # Icon
+                "jpg", "jpeg",  # JPEG
+                "png",       # PNG
+                "pbm",       # Portable Bitmap
+                "pgm",       # Portable Graymap
+                "ppm",       # Portable Pixmap
+                "tiff", "tif",  # TIFF
+                "xbm",       # X Bitmap
+                "xpm"        # X Pixmap
+            ]
+
+            for i in file_list:
+                if  i.split("/")[-1].split(".")[-1] in accepted_formats:
+                    self.add_texture_frame(i)
+            
     def tab_handler(self,index):
         tab_lists = [
             self.paint_editor_tab,
@@ -139,12 +192,13 @@ class ui_class(main_ui_form, QtWidgets.QWidget):
         main_item_bg_shadow.setObjectName(f"{self.current_card_index}_main_item_bg_shadow")
 
 
-        setattr(self, f"alias_input_{ self.current_card_index}", QtWidgets.QLineEdit(item_frame))
-        alias_input:QtWidgets.QLineEdit = getattr(self, f"alias_input_{ self.current_card_index}")
+        setattr(self, f"alias_input_{ self.current_card_index}", DragDropLineEdit(item_frame))
+        alias_input:DragDropLineEdit = getattr(self, f"alias_input_{ self.current_card_index}")
         alias_input.setGeometry(QtCore.QRect(140, 75, 221, 30))
         alias_input.setStyleSheet("border-radius:6px; background-color: rgb(109, 37, 91); border-bottom:1px solid rgb(229, 130, 202); font: 10pt \"Hawkeye\"; color:rgb(200, 114, 177);")
         alias_input.setObjectName("alias_input")
         alias_input.setText("0x0000000000000000")
+        alias_input.file_dropped.connect(self.alias_file_name_drop)
         
         setattr(self, f"Alias_title_{self.current_card_index}", QtWidgets.QLabel(item_frame))
         Alias_title = getattr(self, f"Alias_title_{self.current_card_index}")
@@ -306,6 +360,12 @@ class ui_class(main_ui_form, QtWidgets.QWidget):
         self.scroll_images_area.setMinimumSize(0,self.current_card_index*131)
 
         print(self.current_card_index)
+
+    def alias_file_name_drop(self,psg_path):
+        psg_file_name = psg_path[0].split("/")[-1].split(".")[0]
+        if "0x" in psg_file_name:
+            sender:DragDropLineEdit = self.sender()
+            sender.setText(psg_file_name)
 
     def image_to_dds(self,texture_path):
         subprocess.run(f'assets/texconv.exe -y -f DXT5 -o "{texture_path}" "{self.cwd}/temp.png"')

@@ -149,7 +149,7 @@ class Ui_CFSS(object):
         self.images_bg_textures.setAlignment(QtCore.Qt.AlignCenter)
         self.images_bg_textures.setObjectName("images_bg_textures")
         self.scrollArea = QtWidgets.QScrollArea(self.paint_editor_tab)
-        self.scrollArea.setGeometry(QtCore.QRect(10, 10, 771, 631))
+        self.scrollArea.setGeometry(QtCore.QRect(10, 10, 771, 611))
         self.scrollArea.setStyleSheet("background-color: rgba(255, 255, 255, 0);\n"
 "")
         self.scrollArea.setFrameShape(QtWidgets.QFrame.NoFrame)
@@ -159,7 +159,7 @@ class Ui_CFSS(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scroll_images_area = QtWidgets.QWidget()
-        self.scroll_images_area.setGeometry(QtCore.QRect(0, 0, 771, 631))
+        self.scroll_images_area.setGeometry(QtCore.QRect(0, 0, 771, 611))
         self.scroll_images_area.setMinimumSize(QtCore.QSize(0, 0))
         self.scroll_images_area.setObjectName("scroll_images_area")
         self.scrollArea.setWidget(self.scroll_images_area)
@@ -177,6 +177,11 @@ class Ui_CFSS(object):
 "background-color: rgb(58, 19, 47);\n"
 "}")
         self.ConvertImages.setObjectName("ConvertImages")
+        self.label = QtWidgets.QLabel(self.paint_editor_tab)
+        self.label.setGeometry(QtCore.QRect(10, 633, 391, 20))
+        self.label.setStyleSheet("font: 10pt \"Hawkeye\";\n"
+"color: rgb(117, 39, 96);")
+        self.label.setObjectName("label")
         self.bg = QtWidgets.QLabel(CFSS)
         self.bg.setGeometry(QtCore.QRect(49, 30, 1101, 651))
         self.bg.setStyleSheet("background-color:#1d0a18;\n"
@@ -208,6 +213,7 @@ class Ui_CFSS(object):
         self.coverter.setText(_translate("CFSS", "converter"))
         self.images_bg_textures.setText(_translate("CFSS", "drag here"))
         self.ConvertImages.setText(_translate("CFSS", "Convert Images"))
+        self.label.setText(_translate("CFSS", "Credit to: Sam, Wispp, Tuukkas and EA Skate Modding"))
 
 
 if __name__ == "__main__":
