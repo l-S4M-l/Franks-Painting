@@ -157,6 +157,8 @@ class ui_class(main_ui_form, QtWidgets.QWidget):
                 if  i.split("/")[-1].split(".")[-1] in accepted_formats:
                     self.add_texture_frame(i)
             
+            self.scroll_images_area.setMinimumSize(0,self.current_card_index*131)
+            
     def tab_handler(self,index):
         tab_lists = [
             self.paint_editor_tab,
